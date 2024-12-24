@@ -1,0 +1,4 @@
+FUNCTION main :
+va := #-10
+WRITE va
+RETURN #0
