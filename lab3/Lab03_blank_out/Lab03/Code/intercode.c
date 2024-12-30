@@ -963,7 +963,6 @@ InterCode optimizeSUBIR(Operand dest, Operand src1, Operand src2)
     else if (src2->kind == CONSTANT_OP && src2->value == 0 &&
              src1->kind != GET_ADDR_OP && src1->kind != GET_VAL_OP)
     {
-        // printf("222222222222\n");
         operandCpy(dest, src1);
         return getNullInterCode();
     }
@@ -971,7 +970,6 @@ InterCode optimizeSUBIR(Operand dest, Operand src1, Operand src2)
     else if (src1->kind == CONSTANT_OP && src1->value == 0 &&
              src2->kind != GET_ADDR_OP && src2->kind != GET_VAL_OP)
     {
-        // printf("11111111111\n");
         operandCpy(dest, src2);
         return getNullInterCode();
     }
@@ -996,19 +994,17 @@ InterCode optimizeMULIR(Operand dest, Operand src1, Operand src2)
         operandCpy(dest, getValue(src1->value * src2->value));
         return getNullInterCode();
     }
-    // 没有优化
+    // 乘以0, 结果为0 (没有优化)
     else if (src1->kind == CONSTANT_OP && src1->value == 0 ||
              src2->kind == CONSTANT_OP && src2->value == 0)
     {
-        // printf("111111111\n");
         operandCpy(dest, getValue(0));
         return getNullInterCode();
     }
-    // 没有优化
+    // 乘以1, 结果为另一个 (没有优化)
     else if (src1->kind == CONSTANT_OP && src1->value == 1 ||
              src2->kind == CONSTANT_OP && src2->value == 1)
     {
-        // printf("2222222222\n");
         operandCpy(dest, (src1->kind == CONSTANT_OP) ? src2 : src1);
         return getNullInterCode();
     }
